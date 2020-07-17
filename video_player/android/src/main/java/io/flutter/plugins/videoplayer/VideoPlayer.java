@@ -224,7 +224,7 @@ final class VideoPlayer {
       if (trackSelection != null) {
         for (int j = 0; j < trackSelection.getTrackGroup().length; j++) {
           Format format = trackSelection.getTrackGroup().getFormat(j);
-          results.add(format.width);
+          results.add(format.height);
 
           System.out.println("width"+format.width);
           System.out.println("height"+format.height);
@@ -238,7 +238,7 @@ final class VideoPlayer {
   int currentQuality() {
     if (exoPlayer.getVideoFormat() == null)
       return 0;
-    return exoPlayer.getVideoFormat().width;
+    return exoPlayer.getVideoFormat().height;
   }
 
   void play() {
@@ -258,18 +258,18 @@ final class VideoPlayer {
     exoPlayer.setVolume(bracketedValue);
   }
 
-  void setQuality(int width) {
+  void setQuality(int height) {
     int bitrate = 0;
-    int height = 0;
+    int width = 0;
 
     for (int i = 0; i < exoPlayer.getCurrentTrackSelections().length; i++) {
       TrackSelection trackSelection = exoPlayer.getCurrentTrackSelections().get(i);
       if (trackSelection != null) {
         for (int j = 0; j < trackSelection.getTrackGroup().length; j++) {
           Format format = trackSelection.getTrackGroup().getFormat(j);
-          if (format.width == width) {
+          if (format.height == height) {
             bitrate = format.bitrate;
-            height = format.height;
+            width = format.width;
             break;
           }
         }
