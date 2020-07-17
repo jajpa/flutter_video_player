@@ -11,6 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 @class FLTCreateMessage;
 @class FLTLoopingMessage;
 @class FLTVolumeMessage;
+@class FLTQualityMessage;
+@class FLTQualitiesMessage;
 @class FLTPositionMessage;
 
 @interface FLTTextureMessage : NSObject
@@ -34,6 +36,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong, nullable) NSNumber *volume;
 @end
 
+@interface FLTQualityMessage : NSObject
+@property(nonatomic, strong, nullable) NSNumber *textureId;
+@property(nonatomic, strong, nullable) NSNumber *quality;
+@end
+
+@interface FLTQualitiesMessage : NSObject
+@property(nonatomic, strong, nullable) NSNumber *textureId;
+@property(nonatomic, strong, nullable) NSArray *qualities;
+@end
+
 @interface FLTPositionMessage : NSObject
 @property(nonatomic, strong, nullable) NSNumber *textureId;
 @property(nonatomic, strong, nullable) NSNumber *position;
@@ -46,8 +58,13 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)dispose:(FLTTextureMessage *)input error:(FlutterError *_Nullable *_Nonnull)error;
 - (void)setLooping:(FLTLoopingMessage *)input error:(FlutterError *_Nullable *_Nonnull)error;
 - (void)setVolume:(FLTVolumeMessage *)input error:(FlutterError *_Nullable *_Nonnull)error;
+- (void)setQuality:(FLTQualityMessage *)input error:(FlutterError *_Nullable *_Nonnull)error;
 - (void)play:(FLTTextureMessage *)input error:(FlutterError *_Nullable *_Nonnull)error;
 - (nullable FLTPositionMessage *)position:(FLTTextureMessage *)input
+                                    error:(FlutterError *_Nullable *_Nonnull)error;
+- (nullable FLTQualityMessage *)currentQuality:(FLTTextureMessage *)input
+                                    error:(FlutterError *_Nullable *_Nonnull)error;
+- (nullable FLTQualitiesMessage *)qualities:(FLTTextureMessage *)input
                                     error:(FlutterError *_Nullable *_Nonnull)error;
 - (void)seekTo:(FLTPositionMessage *)input error:(FlutterError *_Nullable *_Nonnull)error;
 - (void)pause:(FLTTextureMessage *)input error:(FlutterError *_Nullable *_Nonnull)error;
